@@ -2,8 +2,8 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='tensor_builder',
-    version='0.1',
+    name='tensor_build',
+    version='0.3',
     packages=find_packages(),
     install_requires=[
         'tensorflow>=2.0',
