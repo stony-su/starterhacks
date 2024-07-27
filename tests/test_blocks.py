@@ -1,6 +1,6 @@
 # test_blocks.py
 import unittest
-from your_package.blocks import Block
+from blocky.blocks import Block
 
 class TestBlock(unittest.TestCase):
     def test_block_initialization(self):
