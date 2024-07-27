@@ -1,4 +1,3 @@
-# blocks.py
 class Block:
     def __init__(self, name, parameters):
         self.name = name
