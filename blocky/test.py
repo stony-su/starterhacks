@@ -1,6 +1,6 @@
 import tensorflow as tf
-from blocks.dense_block import DenseBlock
-from blocks.activation_block import ActivationBlock
+from tensor_build.blocks.dense_block import DenseBlock
+from tensor_build.blocks.activation_block import ActivationBlock
 
 def test_dense_block():
     dense_block = DenseBlock(units=32, activation='relu')
