@@ -1,10 +1,12 @@
 # test_blocks.py
 import unittest
 import tensor_build
+import tensor_build.blocks
+import tensor_build.blocks.conv_2D_block
 
 class TestBlock(unittest.TestCase):
     def test_block_initialization(self):
-        block = tensor_build.blocks('Dense', {'units': 64, 'activation': 'relu'})
+        block = tensor_build.blocks.conv_2D_block()
         self.assertEqual(block.name, 'Dense')
         self.assertEqual(block.parameters, {'units': 64, 'activation': 'relu'})
 
