@@ -1,6 +1,6 @@
 # test_blocks.py
 import unittest
-from blocky.blocks import Block
+from tensor_builder.blocks import Block
 
 class TestBlock(unittest.TestCase):
     def test_block_initialization(self):
