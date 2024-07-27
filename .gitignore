@@ -1,2 +1,5 @@
 venv
 .venv
+tensor_build/__pycache__
+tensor_build/blocks/__pycache__
+tests/__pycache__
