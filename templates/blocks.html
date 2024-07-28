@@ -359,6 +359,7 @@
 
             // Set the source of the image element to display the random image
             document.getElementById("randomImage").classList.add("none");
+            document.getElementById("downloadButton").classList.add("none");
 
             document.getElementById('runCodeButton').addEventListener('click', function () {
                 // Show the loading screen
@@ -376,6 +377,8 @@
                     document.getElementById('loadingScreen').classList.remove('flex');
                     document.getElementById('loadingScreen').classList.add('none');
                     document.getElementById("randomImage").style.display = 'block';
+                    document.getElementById("downloadButton").classList.remove('none');
+                    document.getElementById("downloadButton").classList.add('flex');
                     document.getElementById('loadingScreen').style.display = 'none';
                 }, Math.floor(Math.random() * 3000) + 5000);
             });
@@ -419,6 +422,31 @@
     </xml>
     <div class="plot-container" style="align-items: center; justify-content: center;">
         <img id="randomImage" src="" alt="Img" style="margin-left: auto; margin-right: auto;">
+        <button id="downloadButton" onclick="downloadFile()" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">Download File</button>
+        <script>
+            function downloadFile() {
+                // Define the path of the file to be downloaded
+                var filePath = "{{ url_for('static', filename='ai.h5') }}";
+
+                // Prompt the user to enter a file name
+                var fileName = "ai.h5";
+
+                // Create a temporary anchor element
+                var a = document.createElement("a");
+                a.href = filePath;
+                a.download = fileName;
+
+                // Append the anchor element to the document body
+                document.body.appendChild(a);
+
+                // Programmatically click the anchor element to trigger the download
+                a.click();
+
+                // Remove the anchor element from the document body
+                document.body.removeChild(a);
+            }
+        </script>
+    </div>
     </div>
     <div id="loadingScreen" class="none">
         <div class="spinner"></div>
