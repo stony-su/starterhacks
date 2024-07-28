@@ -33,10 +33,30 @@ def matchFunction():
     print(comseplist)
     # layer1,layer2,compile,fit
     for i in comseplist:
-        if i == "conv_layer":
+        if "conv2d" in i:
             conv_layer(model)
-        elif "dense":
+        elif "dense_layer":
             dense_layer(model)
+        elif "drop_layer":
+            dropout_layer(model)
+        elif "max_layer":
+            maxpooling_layer(model)
+        elif "active_layer":
+            activation_layer(model)
+        elif "average_layer":
+            averagepooling_layer(model)
+        elif "flat_layer":
+            flatten_layer(model)
+        elif "output_layer":
+            output_layer(model)
+        elif "build_layer":
+            build_model(model)
+        elif "summary_layer":
+            run_model(model)
+        elif "train_layer":
+            fit_model(model)
+        elif "preprocess_layer":
+            preprocess_and_build_model(model)
     return jsonify({'status': 'success'})
 
 def preprocess_and_build_model(test_size=0.2, random_state=42):
