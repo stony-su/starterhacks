@@ -1,15 +1,17 @@
 import tensorflow as tf
-from tensorflow.keras.datasets import cifar10
+import tensorflow
+
+from tensorflow import keras
+from keras import datasets
 from tensor_build.blocks import Conv2DBlock, DenseBlock, DropoutBlock, PoolingBlock
 
 def load_data():
     """
     Load and preprocess CIFAR-10 dataset.
-    
     Returns:
         Tuple of numpy arrays: (x_train, y_train), (x_test, y_test)
     """
-    (x_train, y_train), (x_test, y_test) = cifar10.load_data()
+    (x_train, y_train), (x_test, y_test) = datasets.cifar10.load_data()
     x_train, x_test = x_train / 255.0, x_test / 255.0
     return (x_train, y_train), (x_test, y_test)
 
