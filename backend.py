@@ -6,11 +6,7 @@ from flask_cors import CORS
 from keras import layers, models
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
-from sklearn.compose import ColumnTransformer
-from sklearn.pipeline import Pipeline
-from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import LabelEncoder
+from keras import datasets
 from flask import request, jsonify
 
 app = Flask(__name__)
@@ -39,6 +35,16 @@ def matchFunction():
         elif "dense":
             dense_layer(model)
     return jsonify({'status': 'success'})
+
+def preprocess_and_build_model(test_size=0.2, random_state=42):
+    # Load the MNIST dataset
+    (X_train, y_train), (X_test, y_test) = datasets.mnist.load_data()
+
+    # Flatten the images and normalize the pixel values
+    X_train = X_train.reshape(X_train.shape[0], -1).astype('float32') / 255
+    X_test = X_test.reshape(X_test.shape[0], -1).astype('float32') / 255
+    X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=test_size, random_state=random_state)
+    return X_train, X_val, y_train, y_val
 
 @app.route('/conv_layer')
 def conv_layer(model):
