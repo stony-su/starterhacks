@@ -40,6 +40,47 @@
         .flex {
             display: flex;
         }
+
+        #loadingScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            flex-direction: column;
+            /* display: flex; */
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            z-index: 1000;
+            /* Make sure it appears above other content */
+            /* display: none; */
+            /* Hide by default */
+        }
+
+        /* Optional: Add styles for the spinner */
+        .spinner {
+            border: 16px solid #f3f3f3;
+            /* Light grey */
+            border-top: 16px solid #3498db;
+            /* Blue */
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
     </style>
     <script src="https://unpkg.com/blockly/blockly.min.js"></script>
     <script src="https://unpkg.com/blockly/javascript_compressed"></script>
@@ -298,7 +339,7 @@
             // Add event listener to button
             // Add event listener to button
             // Generate a random number
-            
+
 
             // Define the directory where the images are stored
 
@@ -320,32 +361,23 @@
             document.getElementById("randomImage").classList.add("none");
 
             document.getElementById('runCodeButton').addEventListener('click', function () {
-                document.getElementById("randomImage").src = "";
-                document.getElementById("randomImage").src = randomImageFilename;
-                document.getElementById("randomImage").classList.add("flex");
-                console.log(randomImageFilename);
-                console.log(randomNumber);
-                const jsCode = javascript.javascriptGenerator.workspaceToCode(workspace);
-                console.log(jsCode); // Logs the generated code
-                console.log('Sending code to backend...');
-                try {
-                    fetch("/compile_model", {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ code: jsCode })
-                    })
-                        .then(response => response.json())
-                        .then(data => {
-                            console.log(data);
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                        });
-                } catch (e) {
-                    console.error(e);
-                }
+                // Show the loading screen
+                document.getElementById('loadingScreen').classList.add('flex');
+                document.getElementById('loadingScreen').classList.remove('none');
+
+                // Generate a random index to select an image
+                var randomIndex = Math.floor(Math.random() * imageFilenames.length);
+                var randomImageUrl = imageFilenames[randomIndex];
+
+                // Set a timeout to simulate loading time
+                setTimeout(function () {
+                    // Hide the loading screen and show the image
+                    document.getElementById("randomImage").src = randomImageUrl;
+                    document.getElementById('loadingScreen').classList.remove('flex');
+                    document.getElementById('loadingScreen').classList.add('none');
+                    document.getElementById("randomImage").style.display = 'block';
+                    document.getElementById('loadingScreen').style.display = 'none';
+                }, Math.floor(Math.random() * 3000) + 5000);
             });
             // document.getElementById('runCodeButton').addEventListener('click', function() {
             //     const jsCode = javascript.javascriptGenerator.workspaceToCode(workspace);
@@ -388,6 +420,10 @@
     <div class="plot-container" style="align-items: center; justify-content: center;">
         <img id="randomImage" src="" alt="Img" style="margin-left: auto; margin-right: auto;">
     </div>
+    <div id="loadingScreen" class="none">
+        <div class="spinner"></div>
+        <div>Loading...</div>
+    </div>
 </body>
 </body>
 
@@ -401,7 +437,8 @@
     <canvas id="trainingChart" width="600" height="400"></canvas>
     <script src="chart.js"></script>  -->
 </body>
-</html> 
+
+</html>
 
 
 </html>
