@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: tensor_build
-Version: 1.0.8
+Version: 1.1.3
 Summary: A block-based framework for TensorFlow
 Home-page: https://github.com/stony-su/starterhacks
 Author: Darren, Eddie, Kahan, Richard
