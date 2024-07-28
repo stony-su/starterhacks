@@ -294,7 +294,7 @@
                 console.log(jsCode); // Logs the generated code
                 console.log('Sending code to backend...');
                 try {
-                    fetch("http://localhost:5000/compile_model", {
+                    fetch("http://localhost:5000/conv_layer", {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
