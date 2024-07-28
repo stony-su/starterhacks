@@ -44,7 +44,7 @@ def matchFunction(comsep: str):
         elif "dense":
             dense_layer(model)
 
-
+@app.route('/conv_layerS')
 def conv_layer(model):
     # Define the hard-coded parameters for the Conv2D layer
     filters = 32
