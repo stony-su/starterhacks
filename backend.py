@@ -2,10 +2,12 @@ from flask import Flask, render_template
 import tensorflow
 from tensorflow import keras
 from keras import callbacks
-
+from flask_cors import CORS
 from keras import layers, models
+from flask import request, jsonify
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/')
 def home():
@@ -18,16 +20,18 @@ def blocks():
 
 model = models.Sequential()
 
-@app.route('/compile_model')
-def matchFunction(comsep: str):
+@app.route('/compile_model', methods=['POST'])
+def matchFunction():
+    data = request.json
+    comsep = data.get('code', '')
     comseplist = comsep.split(",")
     # layer1,layer2,compile,fit
     for i in comseplist:
-        if "conv2d":
+        if "conv2d" in i:
             conv_layer(model)
         elif "dense":
             dense_layer(model)
-
+    return jsonify({'status': 'success'})
 
 @app.route('/conv_layer')
 def conv_layer(model):
@@ -58,7 +62,7 @@ def conv_layer(model):
     
     return model
 
-def dense_layer (model):
+def dense_layer(model):
     # Define fixed parameters for the Dense layer
     units = 10
     activation = 'softmax'
@@ -67,7 +71,6 @@ def dense_layer (model):
     model.add(layers.Dense(units=units, activation=activation))
 
     return model
-
 def dropout_layer(model, rate=0.5):
     model.add(layers.Dropout(rate=rate))
     return model
