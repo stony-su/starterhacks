@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 import tensorflow
 from tensorflow import keras
-from keras import layers
+from keras import layers, models
 
 app = Flask(__name__)
 
@@ -31,16 +31,18 @@ fetch("http://localhost:5000/compile_model", (data) => {
 @app.route('/compile_model')
 
 """
-
+model = models.Sequential()
 def matchFunction(comsep: str):
     comseplist = comsep.split(",")
     # layer1,layer2,compile,fit
     for i in comseplist:
-        if "layer1":
-            layer1(model)
-        elif "layer2"
+        if "conv2d":
+            convlayer(model)
+        elif "dense":
+            denselayer(model)
 
-def layer1(model):
+
+def convlayer(model):
     """
     Adds a 2D convolutional layer to the given TensorFlow CNN model with hard-coded parameters.
 
@@ -76,6 +78,27 @@ def layer1(model):
                                 strides=strides))
     
     return model
+
+def denselayer (model):
+    """
+    Adds a Dense layer with fixed parameters to the given TensorFlow CNN model.
+
+    Args:
+        model (tf.keras.Model): The model to which the Dense layer will be added.
+
+    Returns:
+        tf.keras.Model: The updated model with the Dense layer added.
+    """
+    # Define fixed parameters for the Dense layer
+    units = 10
+    activation = 'softmax'
+
+    # Add the Dense layer with fixed parameters
+    model.add(layers.Dense(units=units, activation=activation))
+
+    return model
+
+
 
 
 if __name__ == '__main__':
