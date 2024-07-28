@@ -5,6 +5,8 @@ from tensorflow import keras
 from keras import datasets
 from tensor_build.blocks import Conv2DBlock, DenseBlock, DropoutBlock, PoolingBlock
 
+import distutils
+
 def load_data():
     """
     Load and preprocess CIFAR-10 dataset.
