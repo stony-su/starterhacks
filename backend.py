@@ -21,51 +21,32 @@ def blocks():
     return render_template('blocks.html')
 
 
-model = models.Sequential()
 
 @app.route('/compile_model', methods=['POST'])
 def matchFunction():
+    model = models.Sequential()
+    # print("RAN") #darren it ran
     print('hello world')
     data = request.json
     comsep = data.get('code', '')
-    comseplist = comsep.split(",")
+    comseplist = comsep.split(",")[:-1]
+    print(comseplist)
     # layer1,layer2,compile,fit
     for i in comseplist:
-        if "conv2d" in i:
+        if i == "conv_layer":
             conv_layer(model)
-        elif "dense_layer":
+        elif "dense":
             dense_layer(model)
-        elif "drop_layer":
-            dropout_layer(model)
-        elif "max_layer":
-            maxpooling_layer(model)
-        elif "active_layer":
-            activation_layer(model)
-        elif "average_layer":
-            averagepooling_layer(model)
-        elif "flat_layer":
-            flatten_layer(model)
-        elif "output_layer":
-            output_layer(model)
-        elif "build_layer":
-            build_model(model)
-        elif "summary_layer":
-            run_model(model)
-        elif "train_layer":
-            fit_model(model)
-        elif "preprocess_layer":
-            preprocess_and_build_model(model)
     return jsonify({'status': 'success'})
 
-@app.route('/preprocess_layer')
 def preprocess_and_build_model(test_size=0.2, random_state=42):
     # Load the MNIST dataset
     (X_train, y_train), (X_test, y_test) = datasets.mnist.load_data()
-
+    print(test_size)
     # Flatten the images and normalize the pixel values
     X_train = X_train.reshape(X_train.shape[0], -1).astype('float32') / 255
     X_test = X_test.reshape(X_test.shape[0], -1).astype('float32') / 255
-    X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=test_size, random_state=random_state)
+    X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=0.2, random_state=random_state)
     return X_train, X_val, y_train, y_val
 
 @app.route('/conv_layer')
