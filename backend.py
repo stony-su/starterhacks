@@ -30,11 +30,11 @@ backend logic:
 javascirpt logic:
 -> sends string from html to flask
 })
+"""
+
+model = models.Sequential()
 
 @app.route('/compile_model')
-
-"""
-model = models.Sequential()
 def matchFunction(comsep: str):
     comseplist = comsep.split(",")
     # layer1,layer2,compile,fit
@@ -44,6 +44,7 @@ def matchFunction(comsep: str):
             print('success')
         elif "dense":
             dense_layer(model)
+
 
 @app.route('/conv_layer')
 def conv_layer(model):
