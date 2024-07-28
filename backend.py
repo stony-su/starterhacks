@@ -11,6 +11,10 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
+@app.route('/blocks')
+def blocks():
+    return render_template('blocks.html')
+
 '''
 backend logic:
 -> dragable blocks in html sends string of what blocks are connceted/snapped together

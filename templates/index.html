@@ -3,7 +3,7 @@
 
 <head>
     <link rel="stylesheet" href="style.css">
-
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,7 +59,7 @@
     <section class="Beginners" id="beginners">
         <div class="beginners">
             <div style="display: flex; flex-direction: row; gap: 2em; margin-top: 2em;">
-                <button onclick="beginner()" class="beginners beginner-button">Beginners</button>
+                <button onclick="window.location.href='/blocks'" class="beginners beginner-button">Beginners</button>
                 <button class="beginners beginner-button">Intermediate</button>
             </div>  
         <br><br>
