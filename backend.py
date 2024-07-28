@@ -41,6 +41,7 @@ def matchFunction(comsep: str):
     for i in comseplist:
         if "conv2d":
             conv_layer(model)
+            print('success')
         elif "dense":
             dense_layer(model)
 
