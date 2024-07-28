@@ -21,29 +21,56 @@ def blocks():
     return render_template('blocks.html')
 
 
-model = models.Sequential()
 
 @app.route('/compile_model', methods=['POST'])
 def matchFunction():
+    model = models.Sequential()
+    # print("RAN") #darren it ran
     data = request.json
     comsep = data.get('code', '')
-    comseplist = comsep.split(",")
+    comseplist = comsep.split(",")[:-1]
+    print(comseplist)
     # layer1,layer2,compile,fit
     for i in comseplist:
-        if "conv2d" in i:
+        if i == "conv_layer":
             conv_layer(model)
-        elif "dense":
-            dense_layer(model)
+        elif i =="preprocess_layer":
+            preprocess_and_build_model(model)
+        elif i == "max_layer":
+            maxpooling_layer(model)
+        elif i == "active_layer":
+            activation_layer(model)
+        elif i == "drop_layer":
+            dropout_layer(model)
+        elif i == "average_layer":
+            averagepooling_layer(model)
+        elif i == "flat_layer":
+            flatten_layer(model)
+        elif i == "output_layer":
+            output_layer(model)
+        elif i == "summary_layer":
+            summary = run_model(model)
+            return jsonify({'status': 'success', 'summary': summary})
+        elif i == "build_layer": 
+            build_model(model)
+        elif i == "train_layer":
+            train_test_split(model)
+        # elif i == "dense":
+        #     dense_layer(model)
+        else:
+            model = models.Sequential()
+            return jsonify({'status': 'error'})
+    model = models.Sequential()
     return jsonify({'status': 'success'})
 
-def preprocess_and_build_model(test_size=0.2, random_state=42):
+def preprocess_and_build_model(test_size=2/10, random_state=42):
     # Load the MNIST dataset
     (X_train, y_train), (X_test, y_test) = datasets.mnist.load_data()
-
+    print(test_size)
     # Flatten the images and normalize the pixel values
     X_train = X_train.reshape(X_train.shape[0], -1).astype('float32') / 255
     X_test = X_test.reshape(X_test.shape[0], -1).astype('float32') / 255
-    X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=test_size, random_state=random_state)
+    X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=0.2, random_state=random_state)
     return X_train, X_val, y_train, y_val
 
 @app.route('/conv_layer')

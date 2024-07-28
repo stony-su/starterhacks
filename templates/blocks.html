@@ -38,7 +38,7 @@
     <script>
 
         // Define the custom blocks
-        Blockly.Blocks['custom_block_start'] = {
+        Blockly.Blocks['preprocess_layer'] = {
             init: function () {
                 this.appendDummyInput()
                     .appendField("Start Block");
@@ -49,7 +49,7 @@
             }
         };
 
-        Blockly.Blocks['custom_block_middle1'] = {
+        Blockly.Blocks['conv_layer'] = {
             init: function () {
                 this.appendDummyInput()
                     .appendField("Convulutional Layer");
@@ -61,7 +61,7 @@
             }
         };
 
-        Blockly.Blocks['custom_block_middle2'] = {
+        Blockly.Blocks['max_layer'] = {
             init: function () {
                 this.appendDummyInput()
                     .appendField("Max Pooling Layer");
@@ -73,7 +73,7 @@
             }
         };
 
-        Blockly.Blocks['custom_block_middle3'] = {
+        Blockly.Blocks['active_layer'] = {
             init: function () {
                 this.appendDummyInput()
                     .appendField("Activation Layer");
@@ -85,7 +85,7 @@
             }
         };
 
-        Blockly.Blocks['custom_block_middle4'] = {
+        Blockly.Blocks['drop_layer'] = {
             init: function () {
                 this.appendDummyInput()
                     .appendField("Dropout Layer");
@@ -97,7 +97,7 @@
             }
         };
 
-        Blockly.Blocks['custom_block_middle5'] = {
+        Blockly.Blocks['average_layer'] = {
             init: function () {
                 this.appendDummyInput()
                     .appendField("Average Pooling Layer");
@@ -109,7 +109,7 @@
             }
         };
 
-        Blockly.Blocks['custom_block_middle6'] = {
+        Blockly.Blocks['flat_layer'] = {
             init: function () {
                 this.appendDummyInput()
                     .appendField("Flatten Layer");
@@ -121,7 +121,7 @@
             }
         };
 
-        Blockly.Blocks['custom_block_middle7'] = {
+        Blockly.Blocks['output_layer'] = {
             init: function () {
                 this.appendDummyInput()
                     .appendField("Output Layer");
@@ -169,7 +169,7 @@
             }
         };
 
-        Blockly.Blocks['custom_block_middle11'] = {
+        Blockly.Blocks['summary_layer'] = {
             init: function () {
                 this.appendDummyInput()
                     .appendField("Model Summary");
@@ -181,7 +181,7 @@
             }
         };
 
-        Blockly.Blocks['custom_block_middle12'] = {
+        Blockly.Blocks['build_layer'] = {
             init: function () {
                 this.appendDummyInput()
                     .appendField("Compile Model");
@@ -193,7 +193,7 @@
             }
         };
 
-        Blockly.Blocks['custom_block_end'] = {
+        Blockly.Blocks['train_layer'] = {
             init: function () {
                 this.appendDummyInput()
                     .appendField("Train Model");
@@ -205,73 +205,73 @@
         };
         let csv = "";
         // Define the JavaScript code generation for the custom blocks
-        javascript.javascriptGenerator.forBlock['custom_block_start'] = function (block, generator) {
-            var code = 'start-block, ';
+        javascript.javascriptGenerator.forBlock['preprocess_layer'] = function (block, generator) {
+            var code = 'preprocess_layer,';
             return code;
         };
 
-        javascript.javascriptGenerator.forBlock['custom_block_middle1'] = function (block, generator) {
-            var code = 'middle-block-1, ';
+        javascript.javascriptGenerator.forBlock['conv_layer'] = function (block, generator) {
+            var code = 'conv_layer,';
             return code;
         };
 
-        javascript.javascriptGenerator.forBlock['custom_block_middle2'] = function (block, generator) {
-            var code = 'middle-block-2, ';
+        javascript.javascriptGenerator.forBlock['max_layer'] = function (block, generator) {
+            var code = 'max_layer,';
             return code;
         };
 
-        javascript.javascriptGenerator.forBlock['custom_block_middle3'] = function (block, generator) {
-            var code = 'middle-block-3, ';
+        javascript.javascriptGenerator.forBlock['active_layer'] = function (block, generator) {
+            var code = 'active_layer,';
             return code;
         };
 
-        javascript.javascriptGenerator.forBlock['custom_block_middle4'] = function (block, generator) {
-            var code = 'middle-block-4, ';
+        javascript.javascriptGenerator.forBlock['drop_layer'] = function (block, generator) {
+            var code = 'drop_layer,';
             return code;
         };
 
-        javascript.javascriptGenerator.forBlock['custom_block_middle5'] = function (block, generator) {
-            var code = 'middle-block-5, ';
+        javascript.javascriptGenerator.forBlock['average_layer'] = function (block, generator) {
+            var code = 'average_layer,';
             return code;
         };
 
-        javascript.javascriptGenerator.forBlock['custom_block_middle6'] = function (block, generator) {
-            var code = 'middle-block-6, ';
+        javascript.javascriptGenerator.forBlock['flat_layer'] = function (block, generator) {
+            var code = 'flat_layer,';
             return code;
         };
 
-        javascript.javascriptGenerator.forBlock['custom_block_middle7'] = function (block, generator) {
-            var code = 'middle-block-7, ';
+        javascript.javascriptGenerator.forBlock['output_layer'] = function (block, generator) {
+            var code = 'output_layer,';
             return code;
         };
 
         javascript.javascriptGenerator.forBlock['custom_block_middle8'] = function (block, generator) {
-            var code = 'middle-block-8, ';
+            var code = 'custom_block_middle8';
             return code;
         };
 
         javascript.javascriptGenerator.forBlock['custom_block_middle9'] = function (block, generator) {
-            var code = 'middle-block-9, ';
+            var code = 'custom_block_middle9,';
             return code;
         };
 
         javascript.javascriptGenerator.forBlock['custom_block_middle10'] = function (block, generator) {
-            var code = 'middle-block-10, ';
+            var code = 'middle-block-10,';
             return code;
         };
 
-        javascript.javascriptGenerator.forBlock['custom_block_middle11'] = function (block, generator) {
-            var code = 'middle-block-11, ';
+        javascript.javascriptGenerator.forBlock['summary_layer'] = function (block, generator) {
+            var code = 'summary_layer,';
             return code;
         };
 
-        javascript.javascriptGenerator.forBlock['custom_block_middle12'] = function (block, generator) {
-            var code = 'middle-block-12, ';
+        javascript.javascriptGenerator.forBlock['build_layer'] = function (block, generator) {
+            var code = 'build_layer';
             return code;
         };
 
-        javascript.javascriptGenerator.forBlock['custom_block_end'] = function (block, generator) {
-            var code = 'end-block, ';
+        javascript.javascriptGenerator.forBlock['train_layer'] = function (block, generator) {
+            var code = 'train_layer,';
             return code;
         };
 
@@ -334,20 +334,20 @@
     <button id="runCodeButton">Run Code</button>
     <xml id="toolbox" style="display: none">
         <category name="Custom" colour="120">
-            <block type="custom_block_start"></block>
-            <block type="custom_block_middle1"></block>
-            <block type="custom_block_middle2"></block>
-            <block type="custom_block_middle3"></block>
-            <block type="custom_block_middle4"></block>
-            <block type="custom_block_middle5"></block>
-            <block type="custom_block_middle6"></block>
-            <block type="custom_block_middle7"></block>
+            <block type="preprocess_layer"></block>
+            <block type="conv_layer"></block>
+            <block type="max_layer"></block>
+            <block type="active_layer"></block>
+            <block type="drop_layer"></block>
+            <block type="average_layer"></block>
+            <block type="flat_layer"></block>
+            <block type="output_layer"></block>
             <block type="custom_block_middle8"></block>
             <block type="custom_block_middle9"></block>
             <block type="custom_block_middle10"></block>
-            <block type="custom_block_middle11"></block>
-            <block type="custom_block_middle12"></block>
-            <block type="custom_block_end"></block>
+            <block type="summary_layer"></block>
+            <block type="build_layer"></block>
+            <block type="train_layer"></block>
         </category>
     </xml>
 </body>
