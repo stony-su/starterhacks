@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, url_for
 import tensorflow as tf
 from tensorflow.keras import layers, models, callbacks
 from tensorflow.keras.datasets import mnist
@@ -133,7 +133,16 @@ def home():
 
 @app.route('/blocks')
 def blocks():
-    return render_template('blocks.html')
+    # Directory containing your images
+    image_dir = os.path.join(app.static_folder, 'images/')
+    
+    # List all image filenames in the directory
+    image_filenames = [f for f in os.listdir(image_dir) if f.endswith(('.png', '.jpg', '.jpeg', '.gif'))]
+    
+    # Generate full URLs for the images
+    image_urls = [url_for('static', filename=f'images/{image}') for image in image_filenames]
+    
+    return render_template('blocks.html', image_urls=image_urls)
 
 @app.route('/compile_model', methods=['POST'])
 def matchFunction():
@@ -144,7 +153,7 @@ def matchFunction():
     X_train, X_val, y_train, y_val = preprocess_and_build_model()
     for i in range(1, 11):
         # generate_accuracy_plot(i)
-        console.log("");
+        print("")
     """for i in comseplist:
         if "conv2d" in i:
             conv_layer(model)

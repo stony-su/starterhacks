@@ -32,6 +32,14 @@
         #runCodeButton:hover {
             background-color: #45a049;
         }
+
+        .none {
+            display: none;
+        }
+
+        .flex {
+            display: flex;
+        }
     </style>
     <script src="https://unpkg.com/blockly/blockly.min.js"></script>
     <script src="https://unpkg.com/blockly/javascript_compressed"></script>
@@ -290,31 +298,33 @@
             // Add event listener to button
             // Add event listener to button
             // Generate a random number
-            var randomNumber = Math.floor(Math.random() * 10) + 1;
+            
 
             // Define the directory where the images are stored
-            var imageDirectory = "/path/to/images/";
 
             // Create an array of image filenames
             var imageFilenames = [
-                "image.png",
-                "image2.png",
-                "image3.png",
-                "image4.png",
-                "image5.png",
-                "image6.png",
-                "image7.png",
-                // Add more image filenames here
+                "{{ url_for('static', filename='images/image.png') }}",
+                "{{ url_for('static', filename='images/image2.png') }}",
+                "{{ url_for('static', filename='images/image3.png') }}",
+                "{{ url_for('static', filename='images/image4.png') }}",
+                "{{ url_for('static', filename='images/image5.png') }}",
+                "{{ url_for('static', filename='images/image6.png') }}",
+                "{{ url_for('static', filename='images/image7.png') }}",
             ];
-
+            var randomNumber = Math.floor(Math.random() * 7) + 1;
             // Get a random image filename from the array
             var randomImageFilename = imageFilenames[randomNumber - 1];
 
             // Set the source of the image element to display the random image
-
+            document.getElementById("randomImage").classList.add("none");
 
             document.getElementById('runCodeButton').addEventListener('click', function () {
-                document.getElementById("randomImage").src = imageDirectory + randomImageFilename;
+                document.getElementById("randomImage").src = "";
+                document.getElementById("randomImage").src = randomImageFilename;
+                document.getElementById("randomImage").classList.add("flex");
+                console.log(randomImageFilename);
+                console.log(randomNumber);
                 const jsCode = javascript.javascriptGenerator.workspaceToCode(workspace);
                 console.log(jsCode); // Logs the generated code
                 console.log('Sending code to backend...');
@@ -375,8 +385,8 @@
             <block type="train_layer"></block>
         </category>
     </xml>
-    <div class="plot-container">
-        <img id="randomImage" src="" alt="Img">
+    <div class="plot-container" style="align-items: center; justify-content: center;">
+        <img id="randomImage" src="" alt="Img" style="margin-left: auto; margin-right: auto;">
     </div>
 </body>
 </body>
