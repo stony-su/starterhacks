@@ -15,22 +15,6 @@ def home():
 def blocks():
     return render_template('blocks.html')
 
-'''
-backend logic:
--> dragable blocks in html sends string of what blocks are connceted/snapped together
--> this string will represent all functions we have to run
--> functions splti using "match function"
--> functions run 
--> scrap tensorbuild.blocks functions?
--> we can hard code (fix the variables) for the functions
-'''
-
-
-"""
-javascirpt logic:
--> sends string from html to flask
-})
-"""
 
 model = models.Sequential()
 
@@ -41,7 +25,6 @@ def matchFunction(comsep: str):
     for i in comseplist:
         if "conv2d":
             conv_layer(model)
-            print('success')
         elif "dense":
             dense_layer(model)
 
