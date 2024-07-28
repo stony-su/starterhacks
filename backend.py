@@ -26,6 +26,7 @@ def blocks():
 def matchFunction():
     model = models.Sequential()
     # print("RAN") #darren it ran
+    print('hello world')
     data = request.json
     comsep = data.get('code', '')
     comseplist = comsep.split(",")[:-1]
@@ -34,36 +35,11 @@ def matchFunction():
     for i in comseplist:
         if i == "conv_layer":
             conv_layer(model)
-        elif i =="preprocess_layer":
-            preprocess_and_build_model(model)
-        elif i == "max_layer":
-            maxpooling_layer(model)
-        elif i == "active_layer":
-            activation_layer(model)
-        elif i == "drop_layer":
-            dropout_layer(model)
-        elif i == "average_layer":
-            averagepooling_layer(model)
-        elif i == "flat_layer":
-            flatten_layer(model)
-        elif i == "output_layer":
-            output_layer(model)
-        elif i == "summary_layer":
-            summary = run_model(model)
-            return jsonify({'status': 'success', 'summary': summary})
-        elif i == "build_layer": 
-            build_model(model)
-        elif i == "train_layer":
-            train_test_split(model)
-        # elif i == "dense":
-        #     dense_layer(model)
-        else:
-            model = models.Sequential()
-            return jsonify({'status': 'error'})
-    model = models.Sequential()
+        elif "dense":
+            dense_layer(model)
     return jsonify({'status': 'success'})
 
-def preprocess_and_build_model(test_size=2/10, random_state=42):
+def preprocess_and_build_model(test_size=0.2, random_state=42):
     # Load the MNIST dataset
     (X_train, y_train), (X_test, y_test) = datasets.mnist.load_data()
 
@@ -102,6 +78,7 @@ def conv_layer(model):
     
     return model
 
+@app.route('/dense_layer')
 def dense_layer(model):
     # Define fixed parameters for the Dense layer
     units = 10
@@ -111,31 +88,39 @@ def dense_layer(model):
     model.add(layers.Dense(units=units, activation=activation))
 
     return model
+
+@app.route('/drop_layer')
 def dropout_layer(model, rate=0.5):
     model.add(layers.Dropout(rate=rate))
     return model
 
+@app.route('/max_layer')
 def maxpooling_layer(model, pool_size=(2, 2), strides=(2, 2), padding='valid'):
     model.add(layers.MaxPooling2D(pool_size=pool_size, strides=strides, padding=padding))
     return model
 
+@app.route('/active_layer')
 def activation_layer(model, activation='relu'):
     model.add(layers.Activation(activation=activation))
     return model
 
-
+@app.route('/average_layer')
 def averagepooling_layer(model, pool_size=(2, 2), strides=(2, 2), padding='valid'):
     model.add(layers.AveragePooling2D(pool_size=pool_size, strides=strides, padding=padding))
     return model
 
+@app.route('/flat_layer')
 def flatten_layer(model):
     model.add(layers.Flatten())
     return model
 
+@app.route('/output_layer')
 def output_layer(model, units=10, activation='softmax'):
     model.add(layers.Dense(units=units, activation=activation))
     return model
 
+
+@app.route('/build_layer')
 def build_model():
     # Create a new Sequential model
     model = models.Sequential()
@@ -156,11 +141,13 @@ def build_model():
 
     return model
 
+@app.route('/summary_layer')
 def run_model(model):
     model = build_model()
     model.summary()
     return model.summary
 
+@app.route('/train_layer')
 def fit_model(model, train_data, val_data=None, epochs=10, batch_size=32, patience=3):
     # Define early stopping callback
     early_stopping = callbacks.EarlyStopping(monitor='val_loss', patience=patience, restore_best_weights=True)
