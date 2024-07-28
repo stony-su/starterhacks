@@ -66,7 +66,7 @@ def matchFunction():
 def preprocess_and_build_model(test_size=2/10, random_state=42):
     # Load the MNIST dataset
     (X_train, y_train), (X_test, y_test) = datasets.mnist.load_data()
-    print(test_size)
+
     # Flatten the images and normalize the pixel values
     X_train = X_train.reshape(X_train.shape[0], -1).astype('float32') / 255
     X_test = X_test.reshape(X_test.shape[0], -1).astype('float32') / 255
