@@ -25,9 +25,6 @@ backend logic:
 """
 javascirpt logic:
 -> sends string from html to flask
-
-fetch("http://localhost:5000/compile_model", (data) => {
-    
 })
 
 @app.route('/compile_model')
@@ -183,4 +180,4 @@ def fit_model(model, train_data, val_data=None, epochs=10, batch_size=32, patien
     return history
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port = 5000)
