@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='tensor_build',
-    version='1.1.3',
+    version='1.2.0',
     packages=find_packages(),
     install_requires=[
         'tensorflow>=2.0',
