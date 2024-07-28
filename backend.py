@@ -13,29 +13,29 @@ app = Flask(__name__)
 CORS(app)
 
 
-def generate_accuracy_plot(model_number, save_dir='plots'):
-    epochs = np.arange(1, 21)
-    accuracy = np.random.rand(20).cumsum()
-    accuracy /= accuracy.max()  # Normalize to range [0, 1]
+# def generate_accuracy_plot(model_number, save_dir='plots'):
+#     epochs = np.arange(1, 21)
+#     accuracy = np.random.rand(20).cumsum()
+#     accuracy /= accuracy.max()  # Normalize to range [0, 1]
 
-    plt.figure()
-    plt.plot(epochs, accuracy, marker='o', label=f'Model {model_number}')
-    plt.title(f'Accuracy Rate of Model {model_number}')
-    plt.xlabel('Epochs')
-    plt.ylabel('Accuracy')
-    plt.ylim(0, 1)
-    plt.legend()
-    plt.grid(True)
+#     plt.figure()
+#     plt.plot(epochs, accuracy, marker='o', label=f'Model {model_number}')
+#     plt.title(f'Accuracy Rate of Model {model_number}')
+#     plt.xlabel('Epochs')
+#     plt.ylabel('Accuracy')
+#     plt.ylim(0, 1)
+#     plt.legend()
+#     plt.grid(True)
 
-    # Ensure the directory exists
-    os.makedirs(save_dir, exist_ok=True)
+#     # Ensure the directory exists
+#     os.makedirs(save_dir, exist_ok=True)
 
-    # Save the plot
-    plot_path = os.path.join(save_dir, f'model_{model_number}.png')
-    plt.savefig(plot_path)
-    plt.close()
+#     # Save the plot
+#     plot_path = os.path.join(save_dir, f'model_{model_number}.png')
+#     plt.savefig(plot_path)
+#     plt.close()
 
-    return plot_path
+#     return plot_path
 
 def preprocess_and_build_model(test_size=0.2, random_state=42):
     (X_train, y_train), (X_test, y_test) = mnist.load_data()
@@ -143,7 +143,8 @@ def matchFunction():
     comseplist = comsep.split(",")[:-1]
     X_train, X_val, y_train, y_val = preprocess_and_build_model()
     for i in range(1, 11):
-        generate_accuracy_plot(i)
+        # generate_accuracy_plot(i)
+        console.log("");
     """for i in comseplist:
         if "conv2d" in i:
             conv_layer(model)

@@ -289,7 +289,32 @@
 
             // Add event listener to button
             // Add event listener to button
+            // Generate a random number
+            var randomNumber = Math.floor(Math.random() * 10) + 1;
+
+            // Define the directory where the images are stored
+            var imageDirectory = "/path/to/images/";
+
+            // Create an array of image filenames
+            var imageFilenames = [
+                "image.png",
+                "image2.png",
+                "image3.png",
+                "image4.png",
+                "image5.png",
+                "image6.png",
+                "image7.png",
+                // Add more image filenames here
+            ];
+
+            // Get a random image filename from the array
+            var randomImageFilename = imageFilenames[randomNumber - 1];
+
+            // Set the source of the image element to display the random image
+
+
             document.getElementById('runCodeButton').addEventListener('click', function () {
+                document.getElementById("randomImage").src = imageDirectory + randomImageFilename;
                 const jsCode = javascript.javascriptGenerator.workspaceToCode(workspace);
                 console.log(jsCode); // Logs the generated code
                 console.log('Sending code to backend...');
@@ -353,27 +378,6 @@
     <div class="plot-container">
         <img id="randomImage" src="" alt="Img">
     </div>
-    <script>
-        // Generate a random number
-        var randomNumber = Math.floor(Math.random() * 10) + 1;
-
-        // Define the directory where the images are stored
-        var imageDirectory = "/path/to/images/";
-
-        // Create an array of image filenames
-        var imageFilenames = [
-            "image1.jpg",
-            "image2.jpg",
-            "image3.jpg",
-            // Add more image filenames here
-        ];
-
-        // Get a random image filename from the array
-        var randomImageFilename = imageFilenames[randomNumber - 1];
-
-        // Set the source of the image element to display the random image
-        document.getElementById("randomImage").src = imageDirectory + randomImageFilename;
-    </script>
 </body>
 </body>
 
