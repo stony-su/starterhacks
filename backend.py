@@ -5,6 +5,8 @@ from keras import callbacks
 from flask_cors import CORS
 from keras import layers, models
 import pandas as pd
+import json
+from keras import callbacks
 from sklearn.model_selection import train_test_split
 from keras import datasets
 from flask import request, jsonify
@@ -19,8 +21,6 @@ def home():
 @app.route('/blocks')
 def blocks():
     return render_template('blocks.html')
-
-
 
 @app.route('/compile_model', methods=['POST'])
 def matchFunction():
@@ -186,6 +186,17 @@ def fit_model(model, train_data, val_data=None, epochs=10, batch_size=32, patien
                                 epochs=epochs,
                                 batch_size=batch_size,
                                 callbacks=[early_stopping])
+
+    # Save history to JSON file
+    history_dict = {
+        "loss": history.history.get("loss", []),
+        "accuracy": history.history.get("accuracy", []),
+        "val_loss": history.history.get("val_loss", []),
+        "val_accuracy": history.history.get("val_accuracy", [])
+    }
+
+    with open('history.json', 'w') as f:
+        json.dump(history_dict, f)
 
     # Print results
     print("Training completed.")
