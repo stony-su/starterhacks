@@ -350,6 +350,31 @@
             <block type="train_layer"></block>
         </category>
     </xml>
+    <div class="plot-container">
+        <img id="randomImage" src="" alt="Img">
+    </div>
+    <script>
+        // Generate a random number
+        var randomNumber = Math.floor(Math.random() * 10) + 1;
+
+        // Define the directory where the images are stored
+        var imageDirectory = "/path/to/images/";
+
+        // Create an array of image filenames
+        var imageFilenames = [
+            "image1.jpg",
+            "image2.jpg",
+            "image3.jpg",
+            // Add more image filenames here
+        ];
+
+        // Get a random image filename from the array
+        var randomImageFilename = imageFilenames[randomNumber - 1];
+
+        // Set the source of the image element to display the random image
+        document.getElementById("randomImage").src = imageDirectory + randomImageFilename;
+    </script>
+</body>
 </body>
 
 <!-- <head>
@@ -360,9 +385,9 @@
 </head>
 <body> 
     <canvas id="trainingChart" width="600" height="400"></canvas>
-    <!-- <script src="chart.js"></script>  -->
+    <script src="chart.js"></script>  -->
 </body>
-</html> -->
+</html> 
 
 
 </html>
